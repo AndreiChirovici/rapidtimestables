@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block title %}Practice{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block mode %}
+<button type="button" aria-pressed="true" class="btn btn-secondary font-weight-bold">PRACTICE MODE</button>
+{% endblock %}
+
+{% block difficulty %}
+<br>
+<br>
+<div>
+    <h4 style="float:left; color:gold;">Up to &nbsp;</h4><input type="number" class="font-weight-bold font-italic"
+        style="width:50px; height:32px; font-size:19px;" value="10" min="2" max="12" step="1"
+        id="uptoNumber">
+</div>
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+<div class="container">
+    <div class="row text-light display-4">
+        <div class="col-md">
+            <p style="margin-left:45%" id="label1"></p>
+        </div>
+        <div class="col-md">
+            <p class="font-italic font-weight-bold" style="margin-left:45%" id="timesSymbol">X</p>
+        </div>
+        <div class="col-md">
+            <p style="margin-left:45%" id="label2"></p>
+        </div>
+        <div class="col-md" style="margin-left:5%">
+            <p class="font-italic font-weight-bold" id="equalsSymbol">=</p>
+        </div>
+        <div class="col-md" style="margin-left:0%">
+            <input class="form-control" style="width:100px; height:65px; font-size:2rem;" id="resultTextbox">
+        </div>
+        <div class="md-auto">
+            <button type="button" class="btn btn-dark btn-lg font-weight-bold font-italic" onclick="checkAnswer()"
+                style="width:95px; height:50px;" id="nextBtn">NEXT</button>
+        </div>
+    </div>
+</div>
+<div class="clearfix text-white float-right mr-4" id="continueDiv" style="visibility: hidden;">
+    <p class="font-italic font-weight-bold h5">Nice one!</p>
+    <p class="font-italic">Ready for some more?</p>
+    <button type="button" class="float-right btn btn-dark btn-lg font-weight-bold font-italic"
+        onclick="continueStreak()" style="width:160px; height:50px;" id="continueBtn">CONTINUE</button>
+</div>
+
+<div class="clearfix text-white float-right mr-4" id="incorrectDiv" style="visibility: hidden;">
+    <p class="font-italic font-weight-bold h5">That's wrong!</p>
+    <p class="font-italic">Try again!</p>
+    <button type="button" class="float-right btn btn-dark btn-lg font-weight-bold font-italic" onclick="wrongAnswer()"
+        style="width:130px; height:50px;" id="backBtn">GO BACK</button>
+</div>
+
+<img src="/static/images/thumbs3.png" class="mx-auto d-block" style="visibility: hidden;" alt="Thumbs" width="300"
+    height="300" id="thumbsUp">
+
+<div class="container">
+    <div class="text-center row">
+        <div class="col-md">
+            <h3 class="font-italic font-weight-bold" style="color:gold; margin-left:60%;">Winning Streak:</h3>
+        </div>
+        <div class="col-md" style="margin-left:0%; color:white;">
+            <h3 class="font-weight-bold font-italic float-left" name="streakLabel">0</h3>
+        </div>
+
+    </div>
+</div>
+</form>
+
+<script>
+    var uptoNumber = document.getElementById("uptoNumber").value
+    var refreshNumber = document.getElementById("uptoNumber")
+
+    // When difficulty level is changed
+    refreshNumber.oninput = function () {
+        refreshNumber = document.getElementById("uptoNumber").value
+
+        num1 = Math.floor(Math.random() * refreshNumber)
+        num2 = Math.floor(Math.random() * refreshNumber)
+        streakScore = 0;
+
+        document.getElementById("label1").innerHTML = num1
+        document.getElementById("label2").innerHTML = num2
+        document.getElementById("streakLabel").innerHTML = streakScore
+        uptoNumber = refreshNumber
+    }
+
+    // When page loads
+    // Assigning random values to labels
+    num1 = Math.floor(Math.random() * uptoNumber)
+    num2 = Math.floor(Math.random() * uptoNumber)
+
+    document.getElementById("label1").innerHTML = num1
+    document.getElementById("label2").innerHTML = num2
+
+    // Setting streak score
+    streakScore = 0;
+
+    function checkAnswer() {
+
+        // Hiding necessary controls
+        label1Show = document.getElementById("label1");
+        label2Show = document.getElementById("label2");
+        timesSymbolShow = document.getElementById("equalsSymbol");
+        equalsSymbolShow = document.getElementById("timesSymbol");
+        resultsboxShow = document.getElementById("resultTextbox");
+        nxtBtnShow = document.getElementById("nextBtn");
+        thumbsup = document.getElementById("thumbsUp");
+        continueDivShow = document.getElementById("continueDiv");
+        incorrectDivShow = document.getElementById("incorrectDiv")
+
+        label1Show.style.visibility = "hidden";
+        label2Show.style.visibility = "hidden";
+        timesSymbolShow.style.visibility = "hidden";
+        equalsSymbolShow.style.visibility = "hidden";
+        nxtBtnShow.style.visibility = "hidden";
+        resultsboxShow.style.visibility = "hidden";
+
+        // Storing correct answer and User answer
+        correctAnswer = num1 * num2
+        userAnswer = document.getElementById("resultTextbox").value
+
+        if (correctAnswer == userAnswer) {
+            thumbsup.style.visibility = "visible";
+            continueDivShow.style.visibility = "visible";
+            streakScore++
+            document.getElementById("streakLabel").innerHTML = streakScore
+
+            //alert("Correct!")
+        } else {
+            thumbsup.style.transform = "rotate(180deg)";
+            thumbsup.style.visibility = "visible";
+            incorrectDivShow.style.visibility = "visible";
+            //streakScore = 0;
+            document.getElementById("streakLabel").innerHTML = streakScore
+
+            //alert("Incorrect!")
+        }
+    }
+
+    function continueStreak() {
+
+        // Generating new random numbers
+        num1 = Math.floor(Math.random() * uptoNumber)
+        num2 = Math.floor(Math.random() * uptoNumber)
+        document.getElementById("label1").innerHTML = num1
+        document.getElementById("label2").innerHTML = num2
+
+        document.getElementById('resultTextbox').value = ''
+        thumbsup.style.visibility = "hidden";
+        continueDivShow.style.visibility = "hidden";
+
+        label1Show.style.visibility = "visible";
+        label2Show.style.visibility = "visible";
+        timesSymbolShow.style.visibility = "visible";
+        equalsSymbolShow.style.visibility = "visible";
+        nxtBtnShow.style.visibility = "visible";
+        resultsboxShow.style.visibility = "visible";
+    }
+
+    function wrongAnswer() {
+        // Resetting streak score
+        streakScore = 0;
+        document.getElementById("streakLabel").innerHTML = streakScore
+
+        thumbsup.style.transform = "rotate(0deg)"; //Rotate thumbs back for the next time
+        thumbsup.style.visibility = "hidden";
+        incorrectDivShow.style.visibility = "hidden";
+
+        label1Show.style.visibility = "visible";
+        label2Show.style.visibility = "visible";
+        timesSymbolShow.style.visibility = "visible";
+        equalsSymbolShow.style.visibility = "visible";
+        nxtBtnShow.style.visibility = "visible";
+        resultsboxShow.style.visibility = "visible";
+    }
+</script>
+
+{% endblock %}
+
+{% block body %}
+{% endblock %}

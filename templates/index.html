@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+<h3 class="text-center text-white" style="font-family: centurySchoolbook;">Using out simple approach, you'll learn your
+    times tables quicker than you can count to 3.</h3>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <a type="button" class="btn btn-info btn-lg font-weight-bold font-italic" style="margin-left:70%" href="{{url_for('learn')}}">Rapid Learn</a>
+        </div>
+        <div class="col-md">
+            <a type="button" class="btn btn-info btn-lg font-weight-bold font-italic" href="{{url_for('practice')}}">Rapid Practice</a>
+        </div>
+        {% endblock %}
+
+        {% block body %}
+        {% endblock %}
