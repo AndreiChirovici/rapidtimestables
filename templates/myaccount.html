@@ -18,8 +18,8 @@
         <p class="card-text">Time spent in practice mode:</p>
         <p class="card-text">Best winning streak: <b>{{g.user.score}}</b></p>
         <p class="card-text">Questions wrong:</p>
-        <a href="#" class="btn btn-primary float-right">Go LEARN</a>
-        <a href="#" class="btn btn-primary float-right mr-3">Go PRACTICE</a>
+        <a href="{{url_for('learn')}}" class="btn btn-primary float-right">Go LEARN</a>
+        <a href="{{url_for('practice')}}" class="btn btn-primary float-right mr-3">Go PRACTICE</a>
       </div>
     </div>
 

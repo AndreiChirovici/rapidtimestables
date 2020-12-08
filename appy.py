@@ -46,20 +46,18 @@ def about():
 def learn():
     return render_template('learn.html')
 
-@appy.route('/practice')
+@appy.route('/practice', methods=['GET', 'POST'])
 def practice():
     if not g.user:
         return redirect(url_for('register'))
 
-   # stringScore = str(users[g.user.id][3])
-   # print(users[g.user.id][3])
-
-  #  score = g.user.score
-  #  if request.method == 'POST':
-  #      lastScore = int(request.form['streakLabel'])
-  #      if lastScore > score:
-  #          score = lastScore
-  #          users[g.user.id][3] = score
+    score = g.user.score
+    if request.method == 'POST':
+        lastScore = int(request.form['streakLabel'])
+        if lastScore > score:
+            score = lastScore
+            users[g.user.id].score == score
+            return redirect(url_for('myaccount'))
 
     return render_template('practice.html')
 

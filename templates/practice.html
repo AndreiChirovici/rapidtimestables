@@ -17,65 +17,68 @@
 <br>
 <div>
     <h4 style="float:left; color:gold;">Up to &nbsp;</h4><input type="number" class="font-weight-bold font-italic"
-        style="width:50px; height:32px; font-size:19px;" value="10" min="2" max="12" step="1"
-        id="uptoNumber">
+        style="width:50px; height:32px; font-size:19px;" value="10" min="2" max="12" step="1" id="uptoNumber">
 </div>
 {% endblock %}
 
 {% block content %}
 <form method="POST">
-<div class="container">
-    <div class="row text-light display-4">
-        <div class="col-md">
-            <p style="margin-left:45%" id="label1"></p>
-        </div>
-        <div class="col-md">
-            <p class="font-italic font-weight-bold" style="margin-left:45%" id="timesSymbol">X</p>
-        </div>
-        <div class="col-md">
-            <p style="margin-left:45%" id="label2"></p>
-        </div>
-        <div class="col-md" style="margin-left:5%">
-            <p class="font-italic font-weight-bold" id="equalsSymbol">=</p>
-        </div>
-        <div class="col-md" style="margin-left:0%">
-            <input class="form-control" style="width:100px; height:65px; font-size:2rem;" id="resultTextbox">
-        </div>
-        <div class="md-auto">
-            <button type="button" class="btn btn-dark btn-lg font-weight-bold font-italic" onclick="checkAnswer()"
-                style="width:95px; height:50px;" id="nextBtn">NEXT</button>
+    <div class="container">
+        <div class="row text-light display-4">
+            <div class="col-md">
+                <p style="margin-left:45%" id="label1"></p>
+            </div>
+            <div class="col-md">
+                <p class="font-italic font-weight-bold" style="margin-left:45%" id="timesSymbol">X</p>
+            </div>
+            <div class="col-md">
+                <p style="margin-left:45%" id="label2"></p>
+            </div>
+            <div class="col-md" style="margin-left:5%">
+                <p class="font-italic font-weight-bold" id="equalsSymbol">=</p>
+            </div>
+            <div class="col-md" style="margin-left:0%">
+                <input class="form-control" style="width:100px; height:65px; font-size:2rem;" id="resultTextbox">
+            </div>
+            <div class="md-auto">
+                <button type="button" class="btn btn-dark btn-lg font-weight-bold font-italic" onclick="checkAnswer()"
+                    style="width:95px; height:50px;" id="nextBtn">NEXT</button>
+            </div>
         </div>
     </div>
-</div>
-<div class="clearfix text-white float-right mr-4" id="continueDiv" style="visibility: hidden;">
-    <p class="font-italic font-weight-bold h5">Nice one!</p>
-    <p class="font-italic">Ready for some more?</p>
-    <button type="button" class="float-right btn btn-dark btn-lg font-weight-bold font-italic"
-        onclick="continueStreak()" style="width:160px; height:50px;" id="continueBtn">CONTINUE</button>
-</div>
-
-<div class="clearfix text-white float-right mr-4" id="incorrectDiv" style="visibility: hidden;">
-    <p class="font-italic font-weight-bold h5">That's wrong!</p>
-    <p class="font-italic">Try again!</p>
-    <button type="button" class="float-right btn btn-dark btn-lg font-weight-bold font-italic" onclick="wrongAnswer()"
-        style="width:130px; height:50px;" id="backBtn">GO BACK</button>
-</div>
-
-<img src="/static/images/thumbs3.png" class="mx-auto d-block" style="visibility: hidden;" alt="Thumbs" width="300"
-    height="300" id="thumbsUp">
-
-<div class="container">
-    <div class="text-center row">
-        <div class="col-md">
-            <h3 class="font-italic font-weight-bold" style="color:gold; margin-left:60%;">Winning Streak:</h3>
-        </div>
-        <div class="col-md" style="margin-left:0%; color:white;">
-            <h3 class="font-weight-bold font-italic float-left" name="streakLabel">0</h3>
-        </div>
-
+    <div class="clearfix text-white float-right mr-4" id="continueDiv" style="visibility: hidden;">
+        <p class="font-italic font-weight-bold h5">Nice one!</p>
+        <p class="font-italic">Ready for some more?</p>
+        <button type="button" class="float-right btn btn-dark btn-lg font-weight-bold font-italic"
+            onclick="continueStreak()" style="width:160px; height:50px;" id="continueBtn">CONTINUE</button>
     </div>
-</div>
+
+    <div class="clearfix text-white float-right mr-4" id="incorrectDiv" style="visibility: hidden;">
+        <p class="font-italic font-weight-bold h5">That's wrong!</p>
+        <p class="font-italic">Try again!</p>
+        <button type="button" class="float-right btn btn-dark btn-lg font-weight-bold font-italic"
+            onclick="wrongAnswer()" style="width:130px; height:50px;" id="backBtn">GO BACK</button>
+    </div>
+
+    <img src="/static/images/thumbs3.png" class="mx-auto d-block" style="visibility: hidden;" alt="Thumbs" width="300"
+        height="300" id="thumbsUp">
 </form>
+<form method="POST">
+    <div class="container">
+        <div class="row">
+            <div class="col-md float-right">
+                <h3 class="font-italic font-weight-bold" style="color:gold; margin-left:10%;">Winning
+                    Streak:</h3>
+            </div>
+            <div class="col-md float-right"><h3 class="font-weight-bold font-italic" id="streakLabel" style="color:white;">0</h3></div>
+            <div class="col-md-4 offset-md-4">
+                <button type="button" class="btn btn-dark btn-lg font-weight-bold font-italic"
+                    style="width:195px; height:50px; margin-right:10%;" name="saveBtn">SAVE and QUIT</button>
+            </div>
+        </div>
+        </div>
+</form>
+
 
 <script>
     var uptoNumber = document.getElementById("uptoNumber").value
@@ -85,8 +88,8 @@
     refreshNumber.oninput = function () {
         refreshNumber = document.getElementById("uptoNumber").value
 
-        num1 = Math.floor(Math.random() * refreshNumber)
-        num2 = Math.floor(Math.random() * refreshNumber)
+        num1 = Math.floor(Math.random() * refreshNumber) + 1
+        num2 = Math.floor(Math.random() * refreshNumber) + 1
         streakScore = 0;
 
         document.getElementById("label1").innerHTML = num1
@@ -97,8 +100,8 @@
 
     // When page loads
     // Assigning random values to labels
-    num1 = Math.floor(Math.random() * uptoNumber)
-    num2 = Math.floor(Math.random() * uptoNumber)
+    num1 = Math.floor(Math.random() * uptoNumber) + 1
+    num2 = Math.floor(Math.random() * uptoNumber) + 1
 
     document.getElementById("label1").innerHTML = num1
     document.getElementById("label2").innerHTML = num2
@@ -151,8 +154,8 @@
     function continueStreak() {
 
         // Generating new random numbers
-        num1 = Math.floor(Math.random() * uptoNumber)
-        num2 = Math.floor(Math.random() * uptoNumber)
+        num1 = Math.floor(Math.random() * uptoNumber) + 1
+        num2 = Math.floor(Math.random() * uptoNumber) + 1
         document.getElementById("label1").innerHTML = num1
         document.getElementById("label2").innerHTML = num2
 

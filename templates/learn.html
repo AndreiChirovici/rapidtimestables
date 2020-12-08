@@ -8,76 +8,92 @@
 {% block navbar %}
 {% endblock %}
 
-{% block mode %}<button type="button" aria-pressed="true" class="btn btn-secondary font-weight-bold">LEARNING MODE</button>{% endblock %}
+{% block mode %}<button type="button" aria-pressed="true" class="btn btn-secondary font-weight-bold">LEARNING
+  MODE</button>{% endblock %}
 
 
 {% block content %}
 
 <div class="container">
-    <div class="row text-light display-4">
-        <div class="col-md">
-            <p style="margin-left:45%"><span id="labelx"></span></p>
-            <form action="/" method="get">
-                <div class="form-group">
-                    <input type="range" class="form-control-range" style="width:250px;" min=0 max=12
-                        id="formControlRange1">
-                </div>
-            </form>
+  <div class="row text-light display-4">
+    <div class="col-md">
+      <p style="margin-left:45%"><span id="labelx"></span></p>
+      <form action="/" method="get">
+        <div class="form-group">
+          <input type="range" class="form-control-range" style="width:250px;" min=0 max=12 id="formControlRange1">
         </div>
-        <div class="col-md">
-            <p class="font-italic font-weight-bold" style="margin-left:45%">X</p>
-        </div>
-        <div class="col-md">
-            <p style="margin-left:45%"><span id="labely"></span></p>
-            <form action="/" method="get">
-                <div class="form-group">
-                    <input type="range" class="form-control-range" style="width:250px;" min=0 max=12
-                        id="formControlRange2">
-                </div>
-            </form>
-        </div>
-        <div class="col-md" style="margin-left:5%">
-            <p class="font-italic font-weight-bold">=</p>
-        </div>
-        <div class="col-md" style="margin-left:5%">
-            <p class="font-italic font-weight-bold"><span id="result"></span></p>
-        </div>
+      </form>
     </div>
+    <div class="col-md">
+      <p class="font-italic font-weight-bold" style="margin-left:45%">X</p>
+    </div>
+    <div class="col-md">
+      <p style="margin-left:45%"><span id="labely"></span></p>
+      <form action="/" method="get">
+        <div class="form-group">
+          <input type="range" class="form-control-range" style="width:250px;" min=0 max=12 id="formControlRange2">
+        </div>
+      </form>
+    </div>
+    <div class="col-md" style="margin-left:5%">
+      <p class="font-italic font-weight-bold">=</p>
+    </div>
+    <div class="col-md" style="margin-left:5%">
+      <p class="font-italic font-weight-bold"><span id="result"></span></p>
+    </div>
+  </div>
 </div>
 <br>
 <br>
 <br>
 <div class="row">
-    <div class="col-sm-6">
-      <div class="card mx-auto" style="width:27rem;">
-        <div class="card-body">
-          <h5 class="card-title">How does it work?</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary float-right">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="card mx-auto" style="width:27rem;">
-        <div class="card-body">
-          <h5 class="card-title">Why learn the times tables?</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary float-right">Go somewhere</a>
-        </div>
+  <div class="col-sm-6">
+    <div class="card mx-auto" style="width:27rem;">
+      <div class="card-body">
+        <h5 class="card-title">How does it work?</h5>
+        <p class="card-text collapse" id="collapse1">Example: 2 x 3 = 6 <br> <br>
+          You just add the 1st number (2), over and over again depending on the 2nd number (3).
+          <br>
+          In this case you add 2, three times, <br>like this:
+          2 + 2 + 2 = 6
+        </p>
+        <button class="btn btn-primary float-right" data-toggle="collapse" data-target="#collapse1">Find Out</button>
       </div>
     </div>
   </div>
-  <br>
-  <div class="row">
-    <div class="card mx-auto" style="width:55rem;">
+  <div class="col-sm-6">
+    <div class="card mx-auto" style="width:27rem;">
       <div class="card-body">
-        <h5 class="card-title">Are there any tricks to this?</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary float-right">Go somewhere</a>
+        <h5 class="card-title">Why learn the times tables?</h5>
+        <p class="card-text collapse font-italic" id="collapse2">The simple answer is that, it will help you a lot with life in the future. 
+          There are so many situations in everyday life where you’ll need to know the answer straight away, you might not have time to pull out a calculator. Think of it as your ABC’s but for Maths!
+          <br>
+          <b>Luckily you have our site to help you out!</b>
+          </p>
+        <button class="btn btn-primary float-right" data-toggle="collapse" data-target="#collapse2">Find Out</button>
       </div>
     </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="card mx-auto" style="width:55rem;">
+    <div class="card-body">
+      <h5 class="card-title">Are there any tricks to this?</h5>
+      <p class="card-text collapse" id="collapse3"><b>Trick 1</b> – order doesn’t matter, look: <b>2 x 3 = 6</b> and <b>3 x 2 = 6</b> 
+        <br> <br>
+        <b>Trick 2</b> – anything times by 0 always equals 0.
+        <br> <br>
+        <b>Trick 3</b> – anything times by 1 always equals the other you’re multiplying it by.
+        <br> <br>
+        <b>Trick 4</b> – use <a type="button" href="{{url_for('practice')}}" aria-pressed="true" class="btn btn-secondary font-weight-bold" style="height: 25px; font-size: 10px;">PRACTICE
+          MODE</a> to learn the RAPID way.
+        </p>
+      <button class="btn btn-primary float-right" data-toggle="collapse" data-target="#collapse3">Find Out</button>
+    </div>
+  </div>
 
-<script>
+  <script>
     // JS code for sliders
 
     var sliderx = document.getElementById("formControlRange1");
@@ -87,8 +103,8 @@
 
     // Update slider1 value
     sliderx.oninput = function () {
-        outputx.innerHTML = this.value;
-        multiplication();
+      outputx.innerHTML = this.value;
+      multiplication();
     }
 
     var slidery = document.getElementById("formControlRange2");
@@ -96,17 +112,16 @@
     outputy.innerHTML = slidery.value;
     // Update slider2 value
     slidery.oninput = function () {
-        outputy.innerHTML = this.value;
-        multiplication();
+      outputy.innerHTML = this.value;
+      multiplication();
     }
     // Multiplying the two numbers together
     function multiplication() {
-        num1 = document.getElementById("formControlRange1").value;
-        num2 = document.getElementById("formControlRange2").value;
-        document.getElementById("result").innerHTML = num1 * num2;
+      num1 = document.getElementById("formControlRange1").value;
+      num2 = document.getElementById("formControlRange2").value;
+      document.getElementById("result").innerHTML = num1 * num2;
     }
+  </script>
 
-</script>
 
-
-{% endblock %}
+  {% endblock %}
