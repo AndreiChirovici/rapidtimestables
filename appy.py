@@ -1,11 +1,13 @@
-from flask import Flask, g, redirect, render_template, url_for, request, session
+from flask import Flask, g, redirect, render_template, url_for, request, session, Response
+from datetime import date
 
 class User:
-    def __init__(self, id, username, memword, score):
+    def __init__(self, id, username, memword, score, datejoined):
         self.id = id
         self.username = username
         self.memword = memword
         self.score = score
+        self.datejoined = datejoined
 
     def __repr__(self):
         return f'<User: {self.username}>'
@@ -51,15 +53,19 @@ def practice():
     if not g.user:
         return redirect(url_for('register'))
 
-    score = g.user.score
-    if request.method == 'POST':
-        lastScore = int(request.form['streakLabel'])
-        if lastScore > score:
-            score = lastScore
-            users[g.user.id].score == score
-            return redirect(url_for('myaccount'))
-
     return render_template('practice.html')
+
+@appy.route("/scoresave", methods=['GET', 'POST'])
+def scoresave():
+    score = g.user.score
+    lastScore = int(request.form.get('streaklabel'))
+    print(score)
+    print(lastScore)
+    if lastScore > score:
+        users[g.user.id].score = lastScore
+        return redirect(url_for('myaccount'))
+    else:
+        return redirect(url_for('myaccount'))
 
 @appy.route('/login', methods=['GET', 'POST'])
 def login():
@@ -92,7 +98,8 @@ def register():
         usernamereg = request.form['usernameregister']
         memwordreg = request.form['memwordregister']
         userid = len(users)
-        users.append(User(id=userid, username=usernamereg, memword=memwordreg, score=0))
+        today = date.today()
+        users.append(User(id=userid, username=usernamereg, memword=memwordreg, score=0, datejoined=today))
         return redirect(url_for('login'))
 
     return render_template('register.html')
